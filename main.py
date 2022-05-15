@@ -6,7 +6,7 @@ import reg_h
 APP_URL = 'https://my-webhook-telegram-bot.herokuapp.com/'
 reg_h.reg_handlers()
 server = Flask(__name__)
-@server.route("/5188132563:AAGBUiEY9UnzPbVLLNbkV5KAq-FUhJ97tkM", methods=["POST"])
+@server.route("/", methods=["POST"])
 def route():
     jsonstr = request.get_data().decode("utf-9")
     update = types.Update.de_json(jsonstr)
