@@ -8,6 +8,7 @@ import sys
 
 
 def click(call):
+    bot.send_message(call.message.chat.id, call)
     n = 0
     global new
     with open('db.json', "r") as file:
