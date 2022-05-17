@@ -59,12 +59,18 @@ def changemydata(message, delmes=True):
                 bot.send_message(message.chat.id, 'Что хотите изменить в моей базе данных?', reply_markup=markup)
                 bot.delete_message(message.chat.id, message.id)
             else:
-                bot.edit_message_text('Что хотите изменить в моей базе данных?', message.chat.id, message.id,
+                bot.edit_message_text('Что хотите изменить в моей базе данных?', message.message.chat.id, message.message.id,
                                       reply_markup=markup)
         else:
-            bot.send_message(message.chat.id, 'Cначала заверши процесс!')
+            if delmes:
+                bot.send_message(message.chat.id, 'Cначала заверши процесс!')
+            else:
+                bot.answer_callback_query(message.id, 'Сначала заверши процесс', show_alert=True)
     else:
-        bot.send_message(message.chat.id, 'Ты новичок, напиши /start !')
+        if delmes:
+            bot.reply_to(message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
+        else:
+            bot.reply_to(message.message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
 
 
 def get_user_info(message, delmes=True):
@@ -74,7 +80,6 @@ def get_user_info(message, delmes=True):
     for i in range(0, len(data["users"])):
         if data["users"][i]["id"] == message.from_user.id:
             n = i
-    if n > 0:
         if data["users"][n]["proc"]["stage"] is None:
             markup = types.InlineKeyboardMarkup(row_width=2)
             idbutton = types.InlineKeyboardButton('id', callback_data='id')
@@ -90,12 +95,18 @@ def get_user_info(message, delmes=True):
                                  reply_markup=markup)
             else:
                 bot.edit_message_text(
-                    f'Что вы, {data["users"][n]["first_name"]}, хотите узнать о своём профиле в Telegram?', message.chat.id,
-                    message.id, reply_markup=markup)
+                    f'Что вы, {data["users"][n]["first_name"]}, хотите узнать о своём профиле в Telegram?', message.message.chat.id,
+                    message.message.id, reply_markup=markup)
         else:
-            bot.send_message(message.chat.id, 'Cначала заверши процесс!')
+            if delmes:
+                bot.send_message(message.chat.id, 'Cначала заверши процесс!')
+            else:
+                bot.answer_callback_query(call.id, 'Сначала заверши процесс', show_alert=True)
     else:
-        bot.reply_to(message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
+        if delmes:
+            bot.reply_to(message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
+        else:
+            bot.reply_to(message.message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
     #os.execl(sys.executable, sys.executable, *sys.argv)
 
 

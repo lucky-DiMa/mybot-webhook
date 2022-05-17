@@ -66,7 +66,7 @@ def click(call):
                                           call.message.id,
                                           reply_markup=markup)
             if call.data == "backtogetmyinfomenu":
-                commands_scripts.get_user_info(call.message, False)
+                commands_scripts.get_user_info(call, False)
             if call.data == "backtochangeanswermoodmenu":
                 setcalmbutton = types.InlineKeyboardButton('Спокойные', callback_data='setcalm')
                 setfunbutton = types.InlineKeyboardButton('Весёлые', callback_data='setfun')
@@ -110,7 +110,7 @@ def click(call):
                     reply_markup=markup)
                 data["users"][n]["mode"] = "fun"
             if call.data == 'backtochoosewhattochangemenu':
-                commands_scripts.changemydata(call.message, False)
+                commands_scripts.changemydata(call, False)
             if call.data == "changefirstname" or call.data == "backtohowtogetfirstname":
                 enterfirstnamefromkeyboardbutton = types.InlineKeyboardButton('Ввести вручную',
                                                                               callback_data="enterfirstnamefromkeyboard")
@@ -202,7 +202,7 @@ def click(call):
             if call.data  == 'backtoemailfunc':
                 commands_scripts.email_func(call.message, False)
         else:
-            bot.send_message(call.message.chat.id, 'Cначала заверши процесс!')
+            bot.answer_callback_query(call.id, 'Сначала заверши процесс', show_alert=True)
     else:
         bot.reply_to(call.message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
     with open('db.json', "w") as file:
