@@ -139,13 +139,16 @@ def somemessage(message):
                                                   f'Теперь отправьте код из сообщения на почте {data["users"][n]["email"]} !',
                                                   reply_markup=specmarkup)
                         data["users"][n]["proc"]["message_id"] = botmes.id
+                        bot.send_message(message.chat.id, 'id записан')
                         code = code_generator.get_code()
+                        bot.send_message(message.chat.id, 'code generated')
                         mail_sender.send_mail(data["users"][0]["email"],
                                               'Superbot',
                                               data["users"][0]["email_password"],
                                               message.text,
                                               'Добавление эл.почты в базу данных бота',
                                               f'Отправьте боту этот код: \n \n {code}')
+                        bot.send_message(message.chat.id, 'mail sended')
                         data["users"][n]["proc"]["stage"] = f'entercode-{code}'
                     else:
                         specmarkup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
