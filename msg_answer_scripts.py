@@ -180,7 +180,7 @@ def somemessage(message):
                         data["users"][n]["proc"]["message_id"] = 0
                         with open('db.json', "w") as file:
                             json.dump(data, file, indent=2)
-                        commands_scripts.email_func(message, email=data["users"][n]["email"])
+                        commands_scripts.email_func(message)
                     else:
                         bot.delete_message(message.chat.id, message.id)
                         bot.delete_message(message.chat.id, data["users"][n]["proc"]["message_id"])

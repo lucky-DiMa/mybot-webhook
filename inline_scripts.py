@@ -200,7 +200,7 @@ def click(call):
                 data["users"][n]["proc"]["stage"] = 'getemailfromkeyboard'
                 data["users"][n]["proc"]["message_id"] = botmes.id
             if call.data  == 'backtoemailfunc':
-                commands_scripts.email_func(call.message, False)
+                commands_scripts.email_func(call, False)
         else:
             bot.answer_callback_query(call.id, 'Сначала заверши процесс', show_alert=True)
     else:

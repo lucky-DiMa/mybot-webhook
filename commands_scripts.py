@@ -144,7 +144,7 @@ def changeanswermood(message):
     else:
         bot.reply_to(message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
 
-def email_func(message, delmes=True, email: str = None):
+def email_func(message, delmes=True):
     n = 0
     with open('db.json', "r") as file:
         data = json.load(file)
@@ -152,16 +152,7 @@ def email_func(message, delmes=True, email: str = None):
         if data["users"][i]["id"] == message.chat.id:
             n = i
     if n > 0:
-        if email is not None:
-            markup = types.InlineKeyboardMarkup(row_width=1)
-            editemailbutton = types.InlineKeyboardButton('Изменить почту', callback_data='addemail')
-            delemailbutton = types.InlineKeyboardButton('Удалить почту', callback_data='delemail')
-            markup.add(editemailbutton, delemailbutton)
-            bot.send_message(message.chat.id,
-                             f' Сейчас ваша почта: {email}\nЧто вы, {data["users"][n]["first_name"]}, хотите сделать?',
-                             reply_markup=markup)
-            #os.execl(sys.executable, sys.executable, *sys.argv)
-        elif data["users"][n]["proc"]["stage"] is None:
+        if data["users"][n]["proc"]["stage"] is None:
             markup = types.InlineKeyboardMarkup(row_width=1)
             if data["users"][i]["email"] is None:
                 addemailbutton = types.InlineKeyboardButton('Добавить почту', callback_data='addemail')
@@ -178,13 +169,19 @@ def email_func(message, delmes=True, email: str = None):
             else:
                 bot.edit_message_text(
                     f'Что вы, {data["users"][n]["first_name"]}, хотите сделать?',
-                    message.chat.id,
-                    message.id,
+                    message.message.chat.id,
+                    message.message.id,
                     reply_markup=markup)
         else:
-            bot.send_message(message.chat.id, 'Cначала заверши процесс!')
+            if delmes:
+                bot.send_message(message.chat.id, 'Cначала заверши процесс!')
+            else:
+                bot.answer_callback_query(message.id, 'Сначала заверши процесс', show_alert=True)
     else:
-        bot.reply_to(message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
+        if delmes:
+            bot.reply_to(message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
+        else:
+            bot.reply_to(message.message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
     #os.execl(sys.executable, sys.executable, *sys.argv)
 
 def reg_handlers():
