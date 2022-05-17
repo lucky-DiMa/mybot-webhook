@@ -135,11 +135,6 @@ def somemessage(message):
                         specmarkup.add(cancelbutton)
                         data["users"][n]["old_email"] = data["users"][n]["email"]
                         data["users"][n]["email"] = message.text
-                        botmes = bot.send_message(message.chat.id,
-                                                  f'Теперь отправьте код из сообщения на почте {data["users"][n]["email"]} !',
-                                                  reply_markup=specmarkup)
-                        data["users"][n]["proc"]["message_id"] = botmes.id
-                        bot.send_message(message.chat.id, 'id записан')
                         code = code_generator.get_code()
                         bot.send_message(message.chat.id, 'code generated')
                         mail_sender.send_mail(data["users"][0]["email"],
@@ -148,7 +143,10 @@ def somemessage(message):
                                               message.text,
                                               'Добавление эл.почты в базу данных бота',
                                               f'Отправьте боту этот код: \n \n {code}')
-                        bot.send_message(message.chat.id, 'mail sended')
+                        botmes = bot.send_message(message.chat.id,
+                                                  f'Теперь отправьте код из сообщения на почте {data["users"][n]["email"]} !',
+                                                  reply_markup=specmarkup)
+                        data["users"][n]["proc"]["message_id"] = botmes.id
                         data["users"][n]["proc"]["stage"] = f'entercode-{code}'
                     else:
                         specmarkup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
