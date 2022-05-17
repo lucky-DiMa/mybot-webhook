@@ -3,13 +3,13 @@ from telebot import types
 from create_bot import bot, token
 from flask import Flask, request
 import reg_h
-APP_URL = 'https://my-webhook-telegram-bot.herokuapp.com/'
+APP_URL = f'https://my-webhook-telegram-bot.herokuapp.com/{token}'
 reg_h.reg_handlers()
 server = Flask(__name__)
 @server.route(f"/{token}", methods=["POST"])
 def route():
-    jsonstr = request.get_data().decode("utf-8")
-    update = types.Update.de_json(jsonstr)
+    json_str = request.get_data().decode("utf-8")
+    update = types.Update.de_json(json_str)
     bot.process_new_updates([update])
     return "!", 200
 
