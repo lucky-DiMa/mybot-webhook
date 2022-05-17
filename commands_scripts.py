@@ -36,7 +36,7 @@ def start(message):
         bot.send_message(message.chat.id, 'Cначала заверши процесс!')
     with open('db.json', "w") as file:
         json.dump(data, file, indent=2)
-    os.execl(sys.executable, sys.executable, *sys.argv)
+    #os.execl(sys.executable, sys.executable, *sys.argv)
 
 
 def changemydata(message, delmes=True):
@@ -96,7 +96,7 @@ def get_user_info(message, delmes=True):
             bot.send_message(message.chat.id, 'Cначала заверши процесс!')
     else:
         bot.reply_to(message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
-    os.execl(sys.executable, sys.executable, *sys.argv)
+    #os.execl(sys.executable, sys.executable, *sys.argv)
 
 
 def changeanswermood(message):
@@ -149,7 +149,7 @@ def email_func(message, delmes=True, email: str = None):
             bot.send_message(message.chat.id,
                              f' Сейчас ваша почта: {email}\nЧто вы, {data["users"][n]["first_name"]}, хотите сделать?',
                              reply_markup=markup)
-            os.execl(sys.executable, sys.executable, *sys.argv)
+            #os.execl(sys.executable, sys.executable, *sys.argv)
         elif data["users"][n]["proc"]["stage"] is None:
             markup = types.InlineKeyboardMarkup(row_width=1)
             if data["users"][i]["email"] is None:
@@ -174,7 +174,7 @@ def email_func(message, delmes=True, email: str = None):
             bot.send_message(message.chat.id, 'Cначала заверши процесс!')
     else:
         bot.reply_to(message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
-    os.execl(sys.executable, sys.executable, *sys.argv)
+    #os.execl(sys.executable, sys.executable, *sys.argv)
 
 def reg_handlers():
     bot.register_message_handler(start, commands=['start'])

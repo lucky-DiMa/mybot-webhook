@@ -208,7 +208,7 @@ def click(call):
         bot.reply_to(call.message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
     with open('db.json', "w") as file:
         json.dump(data, file, indent=2)
-    os.execl(sys.executable, sys.executable, *sys.argv)
+    #os.execl(sys.executable, sys.executable, *sys.argv)
 
 
 def reg_handlers():
