@@ -7,19 +7,6 @@
       "last_name": null,
       "email": "python1234567870@gmail.com",
       "email_password": "mypython121"
-    },
-    {
-      "id": 1358414277,
-      "username": "Sr_lucky_MaN",
-      "first_name": "\u0414\u043c\u0438\u0442\u0440\u0438\u0439",
-      "last_name": "\u0414\u0443\u043d\u0438\u043d",
-      "old_email": null,
-      "email": "d.dunin1709@gmail.com",
-      "mode": "calm",
-      "proc": {
-        "message_id": 0,
-        "stage": null
-      }
     }
   ]
 }

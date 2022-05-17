@@ -8,13 +8,12 @@ import sys
 
 
 def click(call):
-    bot.send_message(call.message.chat.id, call)
     n = 0
     global new
     with open('db.json', "r") as file:
         data = json.load(file)
     for i in range(0, len(data["users"])):
-        if data["users"][i]["id"] == call.message.chat.id:
+        if data["users"][i]["id"] == call.from_user.id:
             n = i
     if n > 0:
         if data["users"][n]["proc"]["stage"] is None:
@@ -27,43 +26,43 @@ def click(call):
             if call.data == "id":
                 markup.add(backtogetmyinfomenubutton)
                 bot.edit_message_text(f'Ваш id: {data["users"][n]["id"]}',
-                                      data["users"][n]["id"],
+                                      call.message.chat.id,
                                       call.message.id,
                                       reply_markup=markup)
             if call.data == "lastname":
                 markup.add(backtogetmyinfomenubutton)
                 bot.edit_message_text(f'Ваша фамилия: {data["users"][n]["last_name"]}',
-                                      data["users"][n]["id"],
+                                      call.message.chat.id,
                                       call.message.id,
                                       reply_markup=markup)
             if call.data == "firstname":
                 markup.add(backtogetmyinfomenubutton)
                 bot.edit_message_text(f'Ваше имя: {data["users"][n]["first_name"]}',
-                                      data["users"][n]["id"],
+                                      call.message.chat.id,
                                       call.message.id,
                                       reply_markup=markup)
             if call.data == "username":
                 markup.add(backtogetmyinfomenubutton)
                 if data["users"][n]["username"] != None:
                     bot.edit_message_text(f'Ваше имя пользователя: @{data["users"][n]["username"]}',
-                                          data["users"][n]["id"],
+                                          call.message.chat.id,
                                           call.message.id,
                                           reply_markup=markup)
                 else:
                     bot.edit_message_text(f'Имя пользователя не задано',
-                                          data["users"][n]["id"],
+                                          call.message.chat.id,
                                           call.message.id,
                                           reply_markup=markup)
             if call.data == 'email':
                 markup.add(backtogetmyinfomenubutton)
                 if data["users"][n]["email"] is not None:
                     bot.edit_message_text(f'В моей базе данных ваша почта: {data["users"][n]["email"]}',
-                                          data["users"][n]["id"],
+                                          call.message.chat.id,
                                           call.message.id,
                                           reply_markup=markup)
                 else:
                     bot.edit_message_text('В моей базе данных нет вашей почты чтобы её добавить напиши /emailfunc',
-                                          data["users"][n]["id"],
+                                          call.message.chat.id,
                                           call.message.id,
                                           reply_markup=markup)
             if call.data == "backtogetmyinfomenu":
@@ -83,14 +82,14 @@ def click(call):
                         mood = 'весело'
                 bot.edit_message_text(
                     f'Сейчас я отвечаю вам {mood}! Какие ответы от меня вы хотите получать на свои сообщения?',
-                    data["users"][n]["id"],
+                    call.message.chat.id,
                     call.message.id,
                     reply_markup=markup)
             if call.data == 'setagr':
                 markup.add(backtochangeanswermoodmenubutton)
                 bot.edit_message_text(
                     f'Сейчас я отвечаю вам агрессивно!',
-                    data["users"][n]["id"],
+                    call.message.chat.id,
                     call.message.id,
                     reply_markup=markup)
                 data["users"][n]["mode"] = "agr"
@@ -98,7 +97,7 @@ def click(call):
                 markup.add(backtochangeanswermoodmenubutton)
                 bot.edit_message_text(
                     f'Сейчас я отвечаю вам спокойно!',
-                    data["users"][n]["id"],
+                    call.message.chat.id,
                     call.message.id,
                     reply_markup=markup)
                 data["users"][n]["mode"] = "calm"
@@ -106,7 +105,7 @@ def click(call):
                 markup.add(backtochangeanswermoodmenubutton)
                 bot.edit_message_text(
                     f'Сейчас я отвечаю вам весело!',
-                    data["users"][n]["id"],
+                    call.message.chat.id,
                     call.message.id,
                     reply_markup=markup)
                 data["users"][n]["mode"] = "fun"
@@ -121,7 +120,7 @@ def click(call):
                            backtochoosewhattochangemenubutton)
                 bot.edit_message_text(
                     f'Сейчас ваше имя в моей базе данных: {data["users"][n]["first_name"]}. Откуда брать новое?',
-                    data["users"][n]["id"],
+                    call.message.chat.id,
                     call.message.id,
                     reply_markup=markup)
             if call.data == "getfirstnamefromaccaunt":
@@ -131,7 +130,7 @@ def click(call):
                 data["users"][n]["first_name"] = call.message.chat.first_name
                 bot.edit_message_text(
                     f'Сейчас ваше имя в моей базе данных: {data["users"][n]["first_name"]}',
-                    data["users"][n]["id"],
+                    call.message.chat.id,
                     call.message.id,
                     reply_markup=markup)
             if call.data == "enterfirstnamefromkeyboard":
@@ -150,7 +149,7 @@ def click(call):
                            backtochoosewhattochangemenubutton)
                 bot.edit_message_text(
                     f'Сейчас ваша фамилия в моей базе данных: {data["users"][n]["last_name"]}. Откуда брать новую?',
-                    data["users"][n]["id"],
+                    call.message.chat.id,
                     call.message.id,
                     reply_markup=markup)
             if call.data == "getlastnamefromaccaunt":
@@ -159,7 +158,7 @@ def click(call):
                 data["users"][n]["first_name"] = call.message.chat.first_name
                 bot.edit_message_text(
                     f'Сейчас ваша фамилия в моей базе данных: {data["users"][n]["last_name"]}',
-                    data["users"][n]["id"],
+                    call.message.chat.id,
                     call.message.id,
                     reply_markup=markup)
             if call.data == "enterlastnamefromkeyboard":
@@ -175,13 +174,13 @@ def click(call):
                 if call.message.chat.username is not None:
                     bot.edit_message_text(
                         f'Теперь в моей базе данных ваше имя пользователя @{data["users"][n]["username"]}',
-                        data["users"][n]["id"],
+                        call.message.chat.id,
                         call.message.id,
                         reply_markup=markup)
                 else:
                     bot.edit_message_text(
                         'Имя пользователя не задано!',
-                        data["users"][n]["id"],
+                        call.message.chat.id,
                         call.message.id,
                         reply_markup=markup)
             if call.data == 'delemail':
@@ -189,7 +188,7 @@ def click(call):
                 backtoemailfuncbutton = types.InlineKeyboardButton('<<Назад', callback_data='backtoemailfunc')
                 markup.add(backtoemailfuncbutton)
                 bot.edit_message_text('Почта удалена из базы данных',
-                                      data["users"][n]["id"],
+                                      call.message.chat.id,
                                       call.message.id,
                                       reply_markup=markup)
             if call.data == 'addemail':

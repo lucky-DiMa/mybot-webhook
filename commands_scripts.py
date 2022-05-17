@@ -12,14 +12,14 @@ def start(message):
     with open('db.json', "r") as file:
         data = json.load(file)
     for i in range(0, len(data["users"])):
-        if data["users"][i]["id"] == message.chat.id:
+        if data["users"][i]["id"] == message.from_user.id:
             new = False
             n = i
     if new:
-        data["users"].append({"id": message.chat.id,
-                              "username": message.chat.username,
-                              "first_name": message.chat.first_name,
-                              "last_name": message.chat.last_name,
+        data["users"].append({"id": message.from_user.id,
+                              "username": message.from_user.username,
+                              "first_name": message.from_user.first_name,
+                              "last_name": message.from_user.last_name,
                               "old_email": None,
                               "email": None,
                               "mode": "calm",
@@ -45,7 +45,7 @@ def changemydata(message, delmes=True):
     with open('db.json', "r") as file:
         data = json.load(file)
     for i in range(0, len(data["users"])):
-        if data["users"][i]["id"] == message.chat.id:
+        if data["users"][i]["id"] == message.from_user.id:
             new = False
             n = i
     if not new:
@@ -72,7 +72,7 @@ def get_user_info(message, delmes=True):
     with open('db.json', "r") as file:
         data = json.load(file)
     for i in range(0, len(data["users"])):
-        if data["users"][i]["id"] == message.chat.id:
+        if data["users"][i]["id"] == message.from_user.id:
             n = i
     if n > 0:
         if data["users"][n]["proc"]["stage"] is None:

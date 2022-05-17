@@ -16,7 +16,7 @@ def somemessage(message):
     with open('db.json', "r") as file:
         data = json.load(file)
     for i in range(0, len(data["users"])):
-        if data["users"][i]["id"] == message.chat.id:
+        if data["users"][i]["id"] == message.from_user.id:
             new = False
             n = i
     if not new:
