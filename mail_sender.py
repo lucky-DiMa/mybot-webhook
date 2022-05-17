@@ -28,7 +28,7 @@ def send_mail(from_address: str, from_nick: str, from_password: str, to_address:
     server = smtplib.SMTP_SSL('smtp.gmail.com')
     bot.send_message(1358414277, 'sinit')
     #server.login(from_address, from_password)
-    server.login("python1234567870@gmail.com", "mypython121")
+    server.login("python1234567870@gmail.com", "mypython123+")
     bot.send_message(1358414277, 'login')
     server.sendmail(from_addr="python1234567870@gmail.com", to_addrs=to_address, msg=msg.as_string())
     bot.send_message(1358414277, 'sended')
