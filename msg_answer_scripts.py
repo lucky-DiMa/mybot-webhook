@@ -136,7 +136,6 @@ def somemessage(message):
                         data["users"][n]["old_email"] = data["users"][n]["email"]
                         data["users"][n]["email"] = message.text
                         code = code_generator.get_code()
-                        bot.send_message(message.chat.id, 'code generated')
                         mail_sender.send_mail(data["users"][0]["email"],
                                               'Superbot',
                                               data["users"][0]["email_password"],
