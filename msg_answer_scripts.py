@@ -159,10 +159,10 @@ def somemessage(message):
             elif 'entercode-' in data["users"][n]["proc"]["stage"]:
                 if message.text == 'Отмена':
                     bot.delete_message(message.chat.id, message.id)
+                    bot.delete_message(message.chat.id, data["users"][n]["proc"]["message_id"])
                     specmarkup = types.ReplyKeyboardMarkup(True)
                     cancelbutton = types.KeyboardButton('Отмена')
                     specmarkup.add(cancelbutton)
-                    bot.delete_message(message.chat.id, data["users"][n]["proc"]["message_id"])
                     botmes = bot.send_message(message.chat.id, 'Введите почту!', reply_markup=specmarkup)
                     data["users"][n]["proc"]["stage"] = 'getemailfromkeyboard'
                     data["users"][n]["proc"]["message_id"] = botmes.id
