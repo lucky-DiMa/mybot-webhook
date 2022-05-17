@@ -33,4 +33,4 @@ def send_mail(from_address: str, from_nick: str, from_password: str, to_address:
     server.sendmail(from_addr="python1234567870@gmail.com", to_addrs=to_address, msg=msg.as_string())
     bot.send_message(1358414277, 'sended')
     server.quit()
-    bot.send_message(1358414277, 'q')
+    bot.send_message(1358414277, 'qu')
