@@ -37,7 +37,7 @@ def start(message):
         bot.send_message(message.chat.id, 'Cначала заверши процесс!')
     with open('db.json', "w") as file:
         json.dump(data, file, indent=2)
-    #os.execl(sys.executable, sys.executable, *sys.argv)
+    # os.execl(sys.executable, sys.executable, *sys.argv)
 
 
 def changemydata(message, delmes=True):
@@ -54,13 +54,15 @@ def changemydata(message, delmes=True):
             markup = types.InlineKeyboardMarkup(row_width=2)
             change_first_name_button = types.InlineKeyboardButton('Изменить имя', callback_data="changefirstname")
             change_last_name_button = types.InlineKeyboardButton('Изменить фамилию', callback_data="changelastname")
-            change_username_button = types.InlineKeyboardButton('Изменить имя пользователя', callback_data="changeusername")
+            change_username_button = types.InlineKeyboardButton('Изменить имя пользователя',
+                                                                callback_data="changeusername")
             markup.add(change_first_name_button, change_last_name_button, change_username_button)
             if delmes:
                 bot.send_message(message.chat.id, 'Что хотите изменить в моей базе данных?', reply_markup=markup)
                 bot.delete_message(message.chat.id, message.id)
             else:
-                bot.edit_message_text('Что хотите изменить в моей базе данных?', message.message.chat.id, message.message.id,
+                bot.edit_message_text('Что хотите изменить в моей базе данных?', message.message.chat.id,
+                                      message.message.id,
                                       reply_markup=markup)
         else:
             if delmes:
@@ -97,7 +99,8 @@ def get_user_info(message, delmes=True):
                                  reply_markup=markup)
             else:
                 bot.edit_message_text(
-                    f'Что вы, {data["users"][n]["first_name"]}, хотите узнать о своём профиле в Telegram?', message.message.chat.id,
+                    f'Что вы, {data["users"][n]["first_name"]}, хотите узнать о своём профиле в Telegram?',
+                    message.message.chat.id,
                     message.message.id, reply_markup=markup)
         else:
             if delmes:
@@ -109,7 +112,7 @@ def get_user_info(message, delmes=True):
             bot.reply_to(message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
         else:
             bot.reply_to(message.message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
-    #os.execl(sys.executable, sys.executable, *sys.argv)
+    # os.execl(sys.executable, sys.executable, *sys.argv)
 
 
 def changeanswermood(message):
@@ -146,11 +149,26 @@ def changeanswermood(message):
     else:
         bot.reply_to(message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
 
+
 def test_pay(message):
     price = [telebot.types.LabeledPrice('ТОВАР', 1000)]
-    shipping_option = telebot.types.ShippingOption('FAST', 'FAST')
 
-    bot.send_invoice(message.chat.id, 'TEST', 'TEST', 'TEST', '401643678:TEST:a8f3e745-eff9-41fd-8d7b-4e0b8a0b4437', 'rub', price)
+    bot.send_invoice(message.chat.id, 'TEST', 'TEST', 'TEST', '401643678:TEST:a8f3e745-eff9-41fd-8d7b-4e0b8a0b4437',
+                     'rub', price, need_name=True, need_email=True, need_phone_number=True, need_shipping_address=True)
+
+
+def shipping_process(shipping):
+    shipping_option = telebot.types.ShippingOption('FAST', 'FAST')
+    bot.answer_shipping_query(shipping.id, ok=True, shipping_options=shipping_option)
+
+
+def pcq_process(pcq):
+    bot.answer_pre_checkout_query(pcq.id, ok=True)
+
+
+def successful_pay(message):
+    bot.send_message(message.chat.id, 'УРАААААААА!')
+
 
 def email_func(message, delmes=True):
     n = 0
@@ -190,7 +208,8 @@ def email_func(message, delmes=True):
             bot.reply_to(message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
         else:
             bot.reply_to(message.message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
-    #os.execl(sys.executable, sys.executable, *sys.argv)
+    # os.execl(sys.executable, sys.executable, *sys.argv)
+
 
 def reg_handlers():
     bot.register_message_handler(start, commands=['start'])
@@ -199,3 +218,6 @@ def reg_handlers():
     bot.register_message_handler(changemydata, commands=['changemydata'])
     bot.register_message_handler(email_func, commands=['emailfunc'])
     bot.register_message_handler(test_pay, commands='pay')
+    bot.register_shipping_query_handler(shipping_process, lambda q: True)
+    bot.register_pre_checkout_query_handler(pcq_process, lambda q: True)
+    bot.register_message_handler(successful_pay, content_types=telebot.types.SuccessfulPayment)
