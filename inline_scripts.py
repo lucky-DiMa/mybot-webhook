@@ -155,7 +155,7 @@ def click(call):
             if call.data == "getlastnamefromaccaunt":
                 backtohowtogetlastnamebutton = types.InlineKeyboardButton('<<Назад', callback_data="backtohowtogetlastname")
                 markup.add(backtohowtogetlastnamebutton)
-                data["users"][n]["first_name"] = call.message.chat.first_name
+                data["users"][n]["last_name"] = call.message.chat.last_name
                 bot.edit_message_text(
                     f'Сейчас ваша фамилия в моей базе данных: {data["users"][n]["last_name"]}',
                     call.message.chat.id,
