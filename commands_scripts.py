@@ -1,3 +1,4 @@
+import telebot
 from create_bot import bot
 # import mail_sender
 import json
@@ -146,7 +147,10 @@ def changeanswermood(message):
         bot.reply_to(message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
 
 def test_pay(message):
-    bot.send_invoice(message.chat.id, 'TEST', 'TEST', 'TEST', )
+    price = [telebot.types.LabeledPrice('ТОВАР', 1000)]
+    shipping_option = telebot.types.ShippingOption('FAST', 'FAST')
+
+    bot.send_invoice(message.chat.id, 'TEST', 'TEST', 'TEST', '401643678:TEST:a8f3e745-eff9-41fd-8d7b-4e0b8a0b4437', 'rub', price)
 
 def email_func(message, delmes=True):
     n = 0
@@ -194,3 +198,4 @@ def reg_handlers():
     bot.register_message_handler(changeanswermood, commands=['changeanswermood'])
     bot.register_message_handler(changemydata, commands=['changemydata'])
     bot.register_message_handler(email_func, commands=['emailfunc'])
+    bot.register_message_handler(test_pay, commands='pay')
