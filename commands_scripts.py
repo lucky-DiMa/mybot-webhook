@@ -212,6 +212,7 @@ def email_func(message, delmes=True):
 
 
 def reg_handlers():
+    bot.register_message_handler(successful_pay, content_types=[telebot.types.SuccessfulPayment])
     bot.register_message_handler(start, commands=['start'])
     bot.register_message_handler(get_user_info, commands=['getmyinfo'])
     bot.register_message_handler(changeanswermood, commands=['changeanswermood'])
@@ -220,4 +221,3 @@ def reg_handlers():
     bot.register_message_handler(test_pay, commands='pay')
     bot.register_shipping_query_handler(shipping_process, lambda q: True)
     bot.register_pre_checkout_query_handler(pcq_process, lambda q: True)
-    bot.register_message_handler(successful_pay, content_types=[telebot.types.SuccessfulPayment])
