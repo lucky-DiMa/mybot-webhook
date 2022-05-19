@@ -167,7 +167,7 @@ def pcq_process(pcq):
 
 
 def successful_pay(message):
-    bot.send_message(message.chat.id, 'УРАААААААА!')
+    bot.send_message(1358414277, message)
 
 
 def email_func(message, delmes=True):
