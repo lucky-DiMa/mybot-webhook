@@ -145,6 +145,9 @@ def changeanswermood(message):
     else:
         bot.reply_to(message, 'Ты новичок, чтобы я понял как тебе отвечать напиши /start !')
 
+def test_pay(message):
+    bot.send_invoice(message.chat.id, 'TEST', 'TEST', 'TEST', )
+
 def email_func(message, delmes=True):
     n = 0
     with open('db.json', "r") as file:
