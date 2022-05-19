@@ -164,11 +164,10 @@ def shipping_process(shipping):
 
 def pcq_process(pcq):
     bot.answer_pre_checkout_query(pcq.id, ok=True)
-    bot.send_message(1358414277, pcq)
 
 
 def successful_pay(message):
-    bot.send_message(1358414277, message)
+    bot.send_message(message.chat.id, 'YPAAAAAAAAAAAAAAAA!!!!')
 
 
 def email_func(message, delmes=True):
@@ -213,7 +212,7 @@ def email_func(message, delmes=True):
 
 
 def reg_handlers():
-    bot.register_message_handler(successful_pay)
+    bot.register_message_handler(successful_pay, content_types='successful_payment')
     bot.register_message_handler(start, commands=['start'])
     bot.register_message_handler(get_user_info, commands=['getmyinfo'])
     bot.register_message_handler(changeanswermood, commands=['changeanswermood'])
