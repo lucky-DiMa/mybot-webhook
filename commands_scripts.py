@@ -168,7 +168,6 @@ def pcq_process(pcq):
 
 def successful_pay(message):
     bot.send_chat_action(message.chat.id, 'upload_photo')
-    bot.send_message(message.chat.id, 'YPAAAAAAAAAAAAAAAA!!!!')
 
 
 def email_func(message, delmes=True):
