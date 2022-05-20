@@ -1,4 +1,4 @@
-import  commands_scripts
+import commands_scripts
 import msg_answer_scripts
 import inline_scripts
 

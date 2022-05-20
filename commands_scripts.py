@@ -167,6 +167,7 @@ def pcq_process(pcq):
 
 
 def successful_pay(message):
+    bot.send_chat_action(message.chat.id, 'Я ТУТ!')
     bot.send_message(message.chat.id, 'YPAAAAAAAAAAAAAAAA!!!!')
 
 
