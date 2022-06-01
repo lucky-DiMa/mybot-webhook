@@ -91,22 +91,15 @@ def somemessage(message):
                 else:
                     dog_index = -1
                     dot_after_dog = False
-                    dot_index = -1
                     next_must_be_not_spec = True
                     email_is_correct = True
                     for i in range(0, len(message.text)):
                         if email_is_correct:
                             if next_must_be_not_spec:
                                 email_is_correct = False
-                                eng_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-                                for l in range(0, len(eng_letters) - 1):
-                                    if message.text[i] == eng_letters[l].lower() or message.text[i] == eng_letters[l] or message.text[i] == '0' or message.text[
-                                        i] == '1' or message.text[i] == '2' or message.text[i] == '3' or message.text[
-                                        i] == '4' or message.text[i] == '5' or message.text[i] == '6' or message.text[
-                                        i] == '7' or message.text[i] == '8' or message.text[i] == '9':
-                                        email_is_correct = True
-                                        next_must_be_not_spec = False
-                                        break
+                                if check(message.text[i]):
+                                    email_is_correct = True
+                                    next_must_be_not_spec = False
                             else:
                                 if check(message.text[i]):
                                     pass
@@ -117,11 +110,9 @@ def somemessage(message):
                                         dog_index = i
                                         next_must_be_not_spec = True
                                 elif message.text[i] == '.':
+                                    next_must_be_not_spec = True
                                     if i - dog_index > 1 and dog_index > -1:
                                         dot_after_dog = True
-                                        next_must_be_not_spec = True
-                                    else:
-                                        next_must_be_not_spec = True
                                 else:
                                     email_is_correct = False
                     if not check(message.text[0]) or not check(message.text[len(message.text) - 1]) or len(

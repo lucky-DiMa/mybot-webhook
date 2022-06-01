@@ -212,7 +212,7 @@ def email_func(message, delmes=True):
 
 
 def reg_handlers():
-    bot.register_message_handler(successful_pay, content_types='successful_payment')
+    bot.register_message_handler(successful_pay, content_types=['successful_payment'])
     bot.register_message_handler(start, commands=['start'])
     bot.register_message_handler(get_user_info, commands=['getmyinfo'])
     bot.register_message_handler(changeanswermood, commands=['changeanswermood'])
