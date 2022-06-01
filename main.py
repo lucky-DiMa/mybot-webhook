@@ -9,6 +9,11 @@ reg_h.reg_handlers()
 server = Flask(__name__)
 
 
+@server.route('/', methods=["POST"])
+def NOSLEEP():
+    bot.send_message(1358414277, request.get_data())
+
+
 @server.route(f"/{token}", methods=["POST"])
 def updater():
     json_str = request.get_data().decode("utf-8")
