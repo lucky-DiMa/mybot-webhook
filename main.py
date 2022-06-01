@@ -11,7 +11,8 @@ server = Flask(__name__)
 
 @server.route('/', methods=["POST"])
 def NOSLEEP():
-    bot.send_message(1358414277, request.get_data())
+    bot.send_message(1358414277, 'Z NW')
+    return '!', 200
 
 
 @server.route(f"/{token}", methods=["POST"])
