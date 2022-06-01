@@ -194,7 +194,7 @@ def email_func(message, delmes=True):
                                  reply_markup=markup)
             else:
                 bot.edit_message_text(
-                    f'Что вы, {data["users"][n]["first_name"]}, хотите сделать?',
+                    f'Сейчас ваша почта: {data["users"][n]["email"]}\nЧто вы, {data["users"][n]["first_name"]}, хотите сделать?',
                     message.message.chat.id,
                     message.message.id,
                     reply_markup=markup)
