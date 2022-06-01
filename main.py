@@ -9,18 +9,19 @@ reg_h.reg_handlers()
 server = Flask(__name__)
 
 
-@server.route('/', methods=["POST"])
-def NOSLEEP():
-    bot.send_message(1358414277, 'Z NW')
-    return '!', 200
-
-
 @server.route(f"/{token}", methods=["POST"])
 def updater():
     json_str = request.get_data().decode("utf-8")
     update = types.Update.de_json(json_str)
     bot.process_new_updates([update])
     return '!', 200
+
+
+@server.route('/', methods=["POST"])
+def NOSLEEP():
+    bot.send_message(1358414277, 'Z NW')
+    return '!', 200
+
 
 def main():
     bot.remove_webhook()
