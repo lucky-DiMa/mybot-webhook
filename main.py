@@ -17,7 +17,7 @@ def updater():
     return '!', 200
 
 
-@server.route('/', methods=["POST"])
+@server.route('/systemofpy', methods=["POST"])
 def NOSLEEP():
     bot.send_message(1358414277, 'Z NW')
     return '!', 200
