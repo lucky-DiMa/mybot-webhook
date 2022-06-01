@@ -218,6 +218,6 @@ def reg_handlers():
     bot.register_message_handler(changeanswermood, commands=['changeanswermood'])
     bot.register_message_handler(changemydata, commands=['changemydata'])
     bot.register_message_handler(email_func, commands=['emailfunc'])
-    bot.register_message_handler(test_pay, commands='pay')
+    bot.register_message_handler(test_pay, commands=['pay'])
     bot.register_shipping_query_handler(shipping_process, lambda q: True)
     bot.register_pre_checkout_query_handler(pcq_process, lambda q: True)
