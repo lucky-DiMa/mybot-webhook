@@ -1,1 +1,1 @@
-web: python3 activator.py
+web: python3 main.py
