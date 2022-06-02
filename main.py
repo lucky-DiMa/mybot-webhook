@@ -17,7 +17,8 @@ def updater():
         update = types.Update.de_json(json_str)
         bot.process_new_updates([update])
     except:
-        requests.post('https://my-updater.herokuapp.com/')
+        pass
+        #requests.post('https://my-updater.herokuapp.com/')
     return '!', 200
 
 def main():
