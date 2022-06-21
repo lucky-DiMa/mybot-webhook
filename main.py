@@ -17,11 +17,6 @@ def updater():
     bot.process_new_updates([update])
     return '!', 200
 
-@server.route('/')
-def up():
-    requests.post('https://my-updater.herokuapp.com/')
-    return '!', 200
-
 if __name__ == '__main__':
     bot.remove_webhook()
     bot.set_webhook(url=APP_URL)
